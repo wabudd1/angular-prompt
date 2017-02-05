@@ -1,8 +1,9 @@
-angular.module('cgPrompt',['ui.bootstrap']);
+angular.module('cgPrompt', ['ui.bootstrap']);
 
-angular.module('cgPrompt').factory('prompt',['$uibModal','$q',function($uibModal,$q){
+angular.module('cgPrompt')
+  .factory('prompt', ['$uibModal', '$q', function($uibModal, $q) {
 
-    var prompt = function(options){
+    var prompt = function(options) {
 
         var defaults = {
             title: '',
@@ -12,12 +13,12 @@ angular.module('cgPrompt').factory('prompt',['$uibModal','$q',function($uibModal
             value: '',
             values: false,
             buttons: [
-                {label:'Cancel',cancel:true},
-                {label:'OK',primary:true}
+                { label:'OK',primary:true },
+                { label:'Cancel',cancel:true }
             ]
         };
 
-        if (options === undefined){
+        if (options === undefined) {
             options = {};
         }
 
@@ -29,21 +30,21 @@ angular.module('cgPrompt').factory('prompt',['$uibModal','$q',function($uibModal
 
         var defer = $q.defer();
 
-        $uibModal.open({
-            templateUrl:'angular-prompt.html',
+        $uibModal.open( {
+            templateUrl:'scripts/angular-prompt.html',
             controller: 'cgPromptCtrl',
             resolve: {
-                options:function(){
+                options:function() {
                     return options;
                 }
             }
-        }).result.then(function(result){
-            if (options.input){
+        }).result.then(function(result) {
+            if (options.input) {
                 defer.resolve(result.input);
             } else {
                 defer.resolve(result.button);
             }
-        }, function(){
+        }, function() {
             defer.reject();
         });
 
@@ -54,39 +55,39 @@ angular.module('cgPrompt').factory('prompt',['$uibModal','$q',function($uibModal
 	}
 ]);
 
-angular.module('cgPrompt').controller('cgPromptCtrl',['$scope','options','$timeout',function($scope,options,$timeout){
+angular.module('cgPrompt').controller('cgPromptCtrl', ['$scope', 'options', '$timeout', function($scope, options, $timeout) {
 
-    $scope.input = {name:options.value};
+    $scope.input = { name:options.value };
 
     $scope.options = options;
 
     $scope.form = {};
 
-    $scope.buttonClicked = function(button){
+    $scope.buttonClicked = function(button) {
         if (button.cancel){
             $scope.$dismiss();
             return;
         }
-        if (options.input && $scope.form.cgPromptForm.$invalid){
+        if (options.input && $scope.form.cgPromptForm.$invalid) {
             $scope.changed = true;
             return;
         }
-        $scope.$close({button:button,input:$scope.input.name});
+        $scope.$close({ button:button,input:$scope.input.name });
     };
 
-    $scope.submit = function(){
+    $scope.submit = function() {
         var ok;
-        angular.forEach($scope.options.buttons,function(button){
-            if (button.primary){
+        angular.forEach($scope.options.buttons, function(button){
+            if (button.primary) {
                 ok = button;
             }
         });
-        if (ok){
+        if (ok) {
             $scope.buttonClicked(ok);
         }
     };
 
-    $timeout(function(){
+    $timeout(function() {
         var elem = document.querySelector('#cgPromptInput');
         if (elem) {
             if (elem.select) {
@@ -98,47 +99,86 @@ angular.module('cgPrompt').controller('cgPromptCtrl',['$scope','options','$timeo
         }
     },100);
 
-
 }]);
-
 
 angular.module('cgPrompt').run(['$templateCache', function($templateCache) {
   'use strict';
 
   $templateCache.put('angular-prompt.html',
-    "<div>\n" +
-    "    <div class=\"modal-header\">\n" +
-    "        <button type=\"button\" class=\"close pull-right\" ng-click=\"$dismiss()\" aria-hidden=\"true\">×</button>\n" +
-    "        <h4 class=\"modal-title\">{{options.title}}</h4>\n" +
-    "    </div>\n" +
-    "    <div class=\"modal-body\">\n" +
+    "<div>\r" +
     "\n" +
-    "        <p ng-if=\"options.message\">\n" +
-    "            {{options.message}}\n" +
-    "        </p>\n" +
+    "    <div class=\"modal-header\">\r" +
     "\n" +
-    "        <form id=\"cgPromptForm\" name=\"form.cgPromptForm\" ng-if=\"options.input\" ng-submit=\"submit()\">\n" +
-    "            <div class=\"form-group\" ng-class=\"{'has-error':cgPromptForm.$invalid && changed}\">\n" +
-    "                <label for=\"cgPromptInput\">{{options.label}}</label>\n" +
-    "                <input id=\"cgPromptInput\" type=\"text\" class=\"form-control\"  placeholder=\"{{options.label}}\" ng-model=\"input.name\" required ng-change=\"changed=true\" ng-if=\"!options.values || options.values.length === 0\"/ autofocus=\"autofocus\">\n" +
-    "                <div class=\"input-group\" ng-if=\"options.values\">\n" +
-    "                    <input id=\"cgPromptInput\" type=\"text\" class=\"form-control\" placeholder=\"{{options.label}}\" ng-model=\"input.name\" required ng-change=\"changed=true\" autofocus=\"autofocus\"/>\n" +
+    "        <button type=\"button\" class=\"close pull-right\" ng-click=\"$dismiss()\" aria-hidden=\"true\">×</button>\r" +
     "\n" +
-    "                    <div class=\"input-group-btn\" dropdown>\n" +
-    "                        <button type=\"button\" class=\"btn btn-default dropdown-toggle\" dropdown-toggle data-toggle=\"dropdown\"><span class=\"caret\"></span></button>\n" +
-    "                        <ul class=\"dropdown-menu pull-right\">\n" +
-    "                            <li ng-repeat=\"value in options.values\"><a href=\"\" ng-click=\"input.name = value\">{{value}}</a></li>\n" +
-    "                        </ul>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "         </form>\n" +
+    "        <h4 class=\"modal-title\">{{ options.title }}</h4>\r" +
     "\n" +
-    "    </div>\n" +
-    "    <div class=\"modal-footer\">\n" +
-    "        <button ng-repeat=\"button in options.buttons track by button.label\" class=\"btn btn-default {{button.class}}\" ng-class=\"{'btn-primary':button.primary}\" ng-click=\"buttonClicked(button)\">{{button.label}}</button>\n" +
-    "    </div>\n" +
-    "</div>"
+    "    </div>\r" +
+    "\n" +
+    "    <div class=\"modal-body\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        <p ng-if=\"options.message\">\r" +
+    "\n" +
+    "            {{ options.message }}\r" +
+    "\n" +
+    "        </p>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        <form id=\"cgPromptForm\" name=\"form.cgPromptForm\" ng-if=\"options.input\" ng-submit=\"submit()\">\r" +
+    "\n" +
+    "            <div class=\"form-group\" ng-class=\"{'has-error':cgPromptForm.$invalid && changed}\">\r" +
+    "\n" +
+    "                <label for=\"cgPromptInput\">{{ options.label }}</label>\r" +
+    "\n" +
+    "                <input id=\"cgPromptInput\" type=\"text\" class=\"form-control\" placeholder=\"{{ options.label }}\" ng-model=\"input.name\" required ng-change=\"changed=true\" ng-if=\"!options.values || options.values.length === 0\"/ autofocus=\"autofocus\">\r" +
+    "\n" +
+    "                <div class=\"input-group\" ng-if=\"options.values\">\r" +
+    "\n" +
+    "                    <input id=\"cgPromptInput\" type=\"text\" class=\"form-control\" placeholder=\"{{ options.label }}\" ng-model=\"input.name\" required ng-change=\"changed=true\" autofocus=\"autofocus\"/>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    <div class=\"input-group-btn\" dropdown>\r" +
+    "\n" +
+    "                        <button type=\"button\" class=\"btn btn-default dropdown-toggle\" dropdown-toggle data-toggle=\"dropdown\"><span class=\"caret\"></span></button>\r" +
+    "\n" +
+    "                        <ul class=\"dropdown-menu pull-right\">\r" +
+    "\n" +
+    "                            <li ng-repeat=\"value in options.values\"><a href=\"\" ng-click=\"input.name = value\">{{ value }}</a></li>\r" +
+    "\n" +
+    "                        </ul>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "         </form>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "    <div class=\"modal-footer\">\r" +
+    "\n" +
+    "        <button ng-repeat=\"button in options.buttons track by button.label\"\r" +
+    "\n" +
+    "                class=\"btn btn-default {{ button.class }}\"\r" +
+    "\n" +
+    "                style=\"{{ button.style }}\"\r" +
+    "\n" +
+    "                ng-class=\"{'btn-primary':button.primary}\"\r" +
+    "\n" +
+    "                ng-click=\"buttonClicked(button)\">{{ button.label }}</button>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "</div>\r" +
+    "\n"
   );
 
 }]);

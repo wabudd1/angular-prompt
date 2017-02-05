@@ -85,20 +85,23 @@ function MyCtrl($scope, prompt) {
  A list of values available in a dropdown for the user to select as the input value.
 
  - #### options.buttons
- Type: `Array` of `Object` with properties `label`,`cancel`, `style`, and `primary`  
+ Type: `Array` of `Object` with properties `label`,`cancel`, `class`, `style`, and `primary`  
  Default: `[{ label:'OK', primary: true }, { label:'Cancel', cancel: true }]`  
  A list of the buttons to display on the dialog.
 
 The function returns a promise.  That promise is resolved with either the button that was pressed, or in the case of input prompts, the value the user entered.  If the user pressed a button where `cancel=true` or canceled the dialog another way (hit ESC, etc) then the promise is rejected.
 
 ## Release History
+ * v1.3.0
+   * Added `style` option to buttons
+   * Reordered default buttons (Cancel, OK --> OK, Cancel)
  * v1.2.0
-    * Moved to Angular 1.5 and UI Bootstrap 1.3.
-    * Refactored code to no longer use angular.element(...).scope().
+    * Moved to Angular 1.5 and UI Bootstrap 1.3
+    * Refactored code to no longer use angular.element(...).scope()
  * v1.1.0
-    * Added `style` option to buttons.
+    * Added `class` option to buttons
  * v1.0.1
-    * Updated modal template with correct modal title class.
-    * Added bower_components to ignore in bower.json.
-    * Moved to angular-bootstrap v0.11.
- * v1.0.0 - Initial release.
+    * Updated modal template with correct modal title class
+    * Added bower_components to ignore in bower.json
+    * Moved to angular-bootstrap v0.11
+ * v1.0.0 - Initial release
