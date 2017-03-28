@@ -55,7 +55,7 @@ angular.module('cgPrompt')
 	}
 ]);
 
-angular.module('cgPrompt').controller('cgPromptCtrl', ['$scope', 'options', '$timeout', function($scope, options, $timeout) {
+angular.module('cgPrompt').controller('cgPromptCtrl', ['$scope', 'options', '$timeout', '$sanitize', function($scope, options, $timeout, $sanitize) {
 
     $scope.input = { name:options.value };
 
