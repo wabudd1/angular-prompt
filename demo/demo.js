@@ -1,6 +1,6 @@
 angular.module('app', ['ui.bootstrap','cgPrompt']);
 
-angular.module('app').controller('DemoCtrl',function($scope,prompt){
+angular.module('app').controller('DemoCtrl', function($scope, prompt) {
 
     $scope.options = {
         title: 'Title',
@@ -12,7 +12,7 @@ angular.module('app').controller('DemoCtrl',function($scope,prompt){
         buttons:''
     };
 
-    var processOptions = function(){
+    var processOptions = function() {
         var options = angular.copy($scope.options);
 
         if (options.values.length === 0) {
@@ -32,7 +32,7 @@ angular.module('app').controller('DemoCtrl',function($scope,prompt){
             options.buttons = undefined;
         }
 
-        if (!options.input){
+        if (!options.input) {
             options.input = undefined;
             options.value = undefined;
             options.values = undefined;
@@ -41,19 +41,19 @@ angular.module('app').controller('DemoCtrl',function($scope,prompt){
         return options;
     };
 
-    $scope.getCode = function(){
+    $scope.getCode = function() {
         var options = processOptions();
-        return 'prompt(' + JSON.stringify(options,null,'\t') + ').then(function(result){\n\tconsole.log(result);\n});';        
+        return 'prompt(' + JSON.stringify(options,null,'\t') + ').then(function(result){\n\tconsole.log(result);\n});';
     };
 
-    $scope.go = function(){
+    $scope.go = function() {
         $scope.results = '';
 
         var options = processOptions();
 
-        prompt(options).then(function(results){
+        prompt(options).then(function(results) {
             $scope.results = JSON.stringify(results,null,'\t');
-        },function(){
+        },function() {
             $scope.results = 'Promise rejected';
         });
 
