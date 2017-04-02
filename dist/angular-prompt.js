@@ -55,7 +55,7 @@ angular.module('cgPrompt')
 	}
 ]);
 
-angular.module('cgPrompt').controller('cgPromptCtrl', ['$scope', 'options', '$timeout', function($scope, options, $timeout) {
+angular.module('cgPrompt').controller('cgPromptCtrl', ['$scope', 'options', '$timeout', '$sanitize', function($scope, options, $timeout, $sanitize) {
 
     $scope.input = { name:options.value };
 
@@ -119,11 +119,7 @@ angular.module('cgPrompt').run(['$templateCache', function($templateCache) {
     "\n" +
     "\r" +
     "\n" +
-    "        <p ng-if=\"options.message\">\r" +
-    "\n" +
-    "            {{ options.message }}\r" +
-    "\n" +
-    "        </p>\r" +
+    "        <p ng-if=\"options.message\" ng-bind-html=\"options.message\"></p>\r" +
     "\n" +
     "\r" +
     "\n" +

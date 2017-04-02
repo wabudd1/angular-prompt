@@ -10,7 +10,7 @@ This library depends on [angular-ui-bootstrap](https://github.com/angular-ui/boo
 
 ## Getting Started
 
-Install with Bower or download the the files directly from the dist folder in the repo.
+Install with Bower or download the files directly from the dist folder in the repo.
 ```bash
 bower install angular-prompt --save
 ```
@@ -32,11 +32,11 @@ function MyCtrl($scope, prompt) {
   prompt({
     title: 'Delete this Thing?',
     message: 'Are you sure you want to do that?'
-  }).then(function(){
-    //he hit ok and not cancel
+  }).then(function() {
+    // They hit ok and not cancel
   });
 
-  //ask the user for a string
+  // Ask the user for a string
   prompt({
     title: 'Give me a name',
     message: 'What would you like to name it?',
@@ -44,8 +44,8 @@ function MyCtrl($scope, prompt) {
     label: 'Name',
     value: 'Current name',
     values: ['other','possible','names']
-  }).then(function(name){
-    //the promise is resolved with the user input
+  }).then(function(name) {
+    // The promise is resolved with the user input
   });  
 }
 ```
@@ -62,7 +62,7 @@ function MyCtrl($scope, prompt) {
  - #### options.message
  Type: `String`  
  Default: `''`  
- The message inside the dialog.
+ The message inside the dialog.  Can include HTML.
 
  - #### options.input
  Type: `Boolean`  
@@ -89,9 +89,11 @@ function MyCtrl($scope, prompt) {
  Default: `[{ label:'OK', primary: true }, { label:'Cancel', cancel: true }]`  
  A list of the buttons to display on the dialog.
 
-The function returns a promise.  That promise is resolved with either the button that was pressed, or in the case of input prompts, the value the user entered.  If the user pressed a button where `cancel=true` or canceled the dialog another way (hit ESC, etc) then the promise is rejected.
+The function returns a promise.  That promise is resolved with either the button that was pressed, or in the case of input prompts, the value the user entered.  If the user pressed a button where `cancel=true` or canceled the dialog another way (hit ESC, etc.) then the promise is rejected.
 
 ## Release History
+* v1.4.0
+    * `options.message` is now displayed in the template using `ng-bind-html`, so now you can pass in HTML!
  * v1.3.0
    * Added `style` option to buttons
    * Reordered default buttons (Cancel, OK --> OK, Cancel)
