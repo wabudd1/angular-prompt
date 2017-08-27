@@ -8,6 +8,9 @@ angular.module('cgPrompt')
         var defaults = {
             title: '',
             message: '',
+            inputRequired: true,
+            inputMinLength: 0,
+            inputMaxLength: 1000,
             input: false,
             label: '',
             value: '',
@@ -109,7 +112,7 @@ angular.module('cgPrompt').run(['$templateCache', function($templateCache) {
     "\n" +
     "    <div class=\"modal-header\">\r" +
     "\n" +
-    "        <button type=\"button\" class=\"close pull-right\" ng-click=\"$dismiss()\" aria-hidden=\"true\">×</button>\r" +
+    "        <button type=\"button\" class=\"close pull-right\" ng-click=\"$dismiss()\" aria-hidden=\"true\">&times;</button>\r" +
     "\n" +
     "        <h4 class=\"modal-title\">{{ options.title }}</h4>\r" +
     "\n" +
@@ -129,11 +132,43 @@ angular.module('cgPrompt').run(['$templateCache', function($templateCache) {
     "\n" +
     "                <label for=\"cgPromptInput\">{{ options.label }}</label>\r" +
     "\n" +
-    "                <input id=\"cgPromptInput\" type=\"text\" class=\"form-control\" placeholder=\"{{ options.label }}\" ng-model=\"input.name\" required ng-change=\"changed=true\" ng-if=\"!options.values || options.values.length === 0\"/ autofocus=\"autofocus\">\r" +
+    "                <input id=\"cgPromptInput\" type=\"text\" class=\"form-control\"\r" +
+    "\n" +
+    "                       placeholder=\"{{options.label}}\" name=\"cgPromptInput\"\r" +
+    "\n" +
+    "                       ng-model=\"input.name\" ng-change=\"changed=true\"\r" +
+    "\n" +
+    "                       ng-if=\"!options.values || options.values.length === 0\"/ autofocus=\"autofocus\"\r" +
+    "\n" +
+    "                       ng-maxlength=\"{{options.inputMaxLength}}\" ng-minlength=\"{{options.inputMinLength}}\"\r" +
+    "\n" +
+    "                       ng-required=\"{{options.inputRequired}}\"\r" +
+    "\n" +
+    "                >\r" +
+    "\n" +
+    "                 <div ng-show=\"changed\" style=\"margin:5px;color:#a94442;\">\r" +
+    "\n" +
+    "                    <p ng-if=\"cgPromptForm.cgPromptInput.$error.minlength\" class=\"cg-prompt-error\">'{{ options.label }}' requires at least {{ options.inputMinLength }} characters.</p>\r" +
+    "\n" +
+    "                    <p ng-if=\"cgPromptForm.cgPromptInput.$error.maxlength\">'{{ options.label }}' can have at most {{ options.inputMaxLength }} characters.</p>\r" +
+    "\n" +
+    "                    <p ng-if=\"cgPromptForm.cgPromptInput.$error.required\">The field for '{{ options.label }}' is required to continue.</p>\r" +
+    "\n" +
+    "                 </div>\r" +
     "\n" +
     "                <div class=\"input-group\" ng-if=\"options.values\">\r" +
     "\n" +
-    "                    <input id=\"cgPromptInput\" type=\"text\" class=\"form-control\" placeholder=\"{{ options.label }}\" ng-model=\"input.name\" required ng-change=\"changed=true\" autofocus=\"autofocus\"/>\r" +
+    "                    <input id=\"cgPromptInput\" type=\"text\" class=\"form-control\"\r" +
+    "\n" +
+    "                           placeholder=\"{{ options.label }}\" ng-model=\"input.name\"\r" +
+    "\n" +
+    "                           ng-change=\"changed=true\"\r" +
+    "\n" +
+    "                           autofocus=\"autofocus\"\r" +
+    "\n" +
+    "                           required\r" +
+    "\n" +
+    "                    />\r" +
     "\n" +
     "\r" +
     "\n" +
