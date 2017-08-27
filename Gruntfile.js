@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function (grunt) {
-  
+
   require('load-grunt-tasks')(grunt);
 
   grunt.initConfig({
@@ -48,13 +48,13 @@ module.exports = function (grunt) {
         src:'angular-prompt.html',
         dest: 'temp/templates.js'
       }
-    },   
+    },
    concat: {
       main: {
         src: ['angular-prompt.js', 'temp/templates.js'],
         dest: 'dist/angular-prompt.js'
       }
-    },    
+    },
     uglify: {
       main: {
         files: [
