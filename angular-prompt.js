@@ -8,6 +8,9 @@ angular.module('cgPrompt')
         var defaults = {
             title: '',
             message: '',
+            inputRequired: true,
+            inputMinLength: 0,
+            inputMaxLength: 1000,
             input: false,
             label: '',
             value: '',

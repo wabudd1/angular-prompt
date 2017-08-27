@@ -10,9 +10,25 @@
         <form id="cgPromptForm" name="form.cgPromptForm" ng-if="options.input" ng-submit="submit()">
             <div class="form-group" ng-class="{'has-error':cgPromptForm.$invalid && changed}">
                 <label for="cgPromptInput">{{ options.label }}</label>
-                <input id="cgPromptInput" type="text" class="form-control" placeholder="{{ options.label }}" ng-model="input.name" required ng-change="changed=true" ng-if="!options.values || options.values.length === 0"/ autofocus="autofocus">
+                <input id="cgPromptInput" type="text" class="form-control"
+                       placeholder="{{options.label}}" name="cgPromptInput"
+                       ng-model="input.name" ng-change="changed=true"
+                       ng-if="!options.values || options.values.length === 0"/ autofocus="autofocus"
+                       ng-maxlength="{{options.inputMaxLength}}" ng-minlength="{{options.inputMinLength}}"
+                       ng-required="{{options.inputRequired}}"
+                >
+                 <div ng-show="changed" style="margin:5px;color:#a94442;">
+                    <p ng-if="cgPromptForm.cgPromptInput.$error.minlength" class="cg-prompt-error">'{{ options.label }}' requires at least {{ options.inputMinLength }} characters.</p>
+                    <p ng-if="cgPromptForm.cgPromptInput.$error.maxlength">'{{ options.label }}' can have at most {{ options.inputMaxLength }} characters.</p>
+                    <p ng-if="cgPromptForm.cgPromptInput.$error.required">The field for '{{ options.label }}' is required to continue.</p>
+                 </div>
                 <div class="input-group" ng-if="options.values">
-                    <input id="cgPromptInput" type="text" class="form-control" placeholder="{{ options.label }}" ng-model="input.name" required ng-change="changed=true" autofocus="autofocus"/>
+                    <input id="cgPromptInput" type="text" class="form-control"
+                           placeholder="{{ options.label }}" ng-model="input.name"
+                           ng-change="changed=true"
+                           autofocus="autofocus"
+                           required
+                    />
 
                     <div class="input-group-btn" dropdown>
                         <button type="button" class="btn btn-default dropdown-toggle" dropdown-toggle data-toggle="dropdown"><span class="caret"></span></button>

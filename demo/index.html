@@ -53,6 +53,27 @@
                     </div>
                   </div>
                   <div class="form-group">
+                      <div class="col-sm-offset-2 col-sm-10">
+                          <div class="checkbox">
+                        <label>
+                          <input type="checkbox" ng-model="options.inputRequired"> Input Required
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputMaxLength" class="col-sm-2 control-label">Input Max Length</label>
+                    <div class="col-sm-10">
+                      <input type="number" class="form-control" id="inputMaxLength" ng-model="options.inputMaxLength">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputMinLength" class="col-sm-2 control-label">Input Min Length</label>
+                    <div class="col-sm-10">
+                      <input type="number" class="form-control" id="inputMinLength" ng-model="options.inputMinLength">
+                    </div>
+                  </div>
+                   <div class="form-group">
                     <label for="label" class="col-sm-2 control-label">Label</label>
                     <div class="col-sm-10">
                       <input type="text" class="form-control" id="label" placeholder="label" ng-model="options.label">
@@ -63,7 +84,7 @@
                     <div class="col-sm-10">
                       <input type="text" class="form-control" id="value" placeholder="Value" ng-model="options.value">
                     </div>
-                  </div>     
+                  </div>
                   <div class="form-group">
                     <label for="values" class="col-sm-2 control-label">Values</label>
                     <div class="col-sm-10">
@@ -75,7 +96,7 @@
                     <div class="col-sm-10">
                       <input type="text" class="form-control" id="buttons" placeholder="comma separated list" ng-model="options.buttons">
                     </div>
-                  </div>                                         
+                  </div>
                 </form>
             </div>
             <button class="btn btn-lg btn-primary pull-right" ng-click="go()">Prompt</button>
@@ -84,7 +105,7 @@
             <h4>Code</h4>
             <div class="highlight">
                 <pre>{{getCode()}}</pre>
-            </div>            
+            </div>
             <h4>Result</h4>
             <div class="highlight">
                 <pre>{{results}}</pre>
@@ -98,7 +119,7 @@
   <script src="../bower_components/underscore/underscore.js"></script>
   <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
   <script src="../dist/angular-prompt.js"></script>
-  <script src="demo.js"></script> 
+  <script src="demo.js"></script>
 
 </body>
 </html>
