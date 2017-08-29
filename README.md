@@ -15,7 +15,7 @@ Install with Bower or download the files directly from the dist folder in the re
 bower install angular-prompt --save
 ```
 
-Add `dist/angular-prompt.js` to your index.html.  
+Add `dist/angular-prompt.js` to your `index.html`.  
 
 Add `cgPrompt` as a module dependency for your module.
 
@@ -106,19 +106,5 @@ function MyCtrl($scope, prompt) {
 
 The function returns a promise.  That promise is resolved with either the button that was pressed, or in the case of input prompts, the value the user entered.  If the user pressed a button where `cancel=true` or canceled the dialog another way (hit ESC, etc.) then the promise is rejected.
 
-## Release History
-* v1.4.0
-    * `options.message` is now displayed in the template using `ng-bind-html`, so now you can pass in HTML!
- * v1.3.0
-   * Added `style` option to buttons
-   * Reordered default buttons (Cancel, OK --> OK, Cancel)
- * v1.2.0
-    * Moved to Angular 1.5 and UI Bootstrap 1.3
-    * Refactored code to no longer use angular.element(...).scope()
- * v1.1.0
-    * Added `class` option to buttons
- * v1.0.1
-    * Updated modal template with correct modal title class
-    * Added bower_components to ignore in bower.json
-    * Moved to angular-bootstrap v0.11
- * v1.0.0 - Initial release
+## Changelog / Release History
+Click [here](CHANGELOG.md) to view CHANGELOG.md
