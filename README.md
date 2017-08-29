@@ -6,7 +6,7 @@ This library depends on [angular-ui-bootstrap](https://github.com/angular-ui/boo
 
 ## Demo
 
-[Live Demo](http://cgross.github.io/angular-prompt/demo)
+[Live Demo](http://wabudd1.github.io/angular-prompt/demo)
 
 ## Getting Started
 
