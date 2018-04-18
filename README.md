@@ -12,7 +12,7 @@ This library depends on [angular-ui-bootstrap](https://github.com/angular-ui/boo
 
 Install with Nuget or download the files directly from the dist folder in the repo.
 ```powershell
-Install-Package wbud.angular-prompt.fork -Version 1.5.0	
+PM> Install-Package wbud.angular-prompt.fork -Version 1.5.0	
 ```
 
 Add `dist/angular-prompt.js` to your `index.html`.  
